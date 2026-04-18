@@ -1,0 +1,7 @@
+.faq-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+.faq-card { padding: 1.3rem; }
+.faq-card h4 { margin-bottom: .7rem; }
+.faq-card p { font-size: .94rem; }
+.support-actions { display: flex; justify-content: space-between; gap: 1rem; align-items: center; border-radius: 28px; padding: 1.5rem; border: 1px solid var(--line); background: rgba(255,255,255,.03); }
+.support-actions p:last-of-type { margin-top: .6rem; max-width: 44rem; }
+@media (max-width: 900px) { .faq-grid { grid-template-columns: 1fr; } .support-actions { flex-direction: column; align-items: flex-start; } }

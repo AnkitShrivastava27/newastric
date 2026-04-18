@@ -1,0 +1,16 @@
+.steps-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+.step-card { padding: 1.35rem; }
+.step-head { display: flex; justify-content: space-between; align-items: center; }
+.step-num { color: var(--accent); font-family: var(--font-mono); letter-spacing: .14em; font-size: .72rem; }
+.step-icon { color: var(--text); opacity: .7; }
+.step-card p { margin-top: .75rem; }
+.step-card ul { list-style: none; padding: 0; margin: 1rem 0 0; display: grid; gap: .55rem; }
+.step-card li { display: flex; gap: .5rem; color: var(--muted); font-size: .92rem; }
+.step-card li span { color: var(--accent); }
+.tips-shell { display: grid; gap: 1.2rem; }
+.tips-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+.tip-card { padding: 1.25rem; }
+.guide-cta { padding: 2rem; text-align: center; border-radius: 32px; background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03)); border: 1px solid var(--line); }
+.guide-cta p:last-of-type { margin-top: .8rem; }
+.cta-actions { display: flex; justify-content: center; gap: .75rem; flex-wrap: wrap; margin-top: 1.4rem; }
+@media (max-width: 960px) { .steps-grid, .tips-grid { grid-template-columns: 1fr; } }

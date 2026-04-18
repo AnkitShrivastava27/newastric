@@ -1,0 +1,15 @@
+.contact-layout { display: grid; grid-template-columns: .9fr 1.1fr; gap: 1rem; align-items: start; }
+.contact-info, .contact-form-wrap { padding: 1.35rem; }
+.contact-copy { margin-top: 1rem; }
+.contact-items { display: grid; gap: .85rem; margin-top: 1.2rem; }
+.contact-item { display: grid; gap: .25rem; padding: .9rem 1rem; border-radius: 18px; border: 1px solid var(--line); background: rgba(255,255,255,.03); }
+.contact-item span { color: var(--muted-2); font-size: .82rem; text-transform: uppercase; letter-spacing: .12em; font-family: var(--font-mono); }
+.contact-item a, .contact-item strong { color: var(--text); }
+.contact-form { display: grid; gap: 1rem; }
+.form-row { display: grid; grid-template-columns: repeat(2, 1fr); gap: .9rem; }
+.form-field { display: grid; gap: .45rem; }
+.form-field label { color: var(--text); font-size: .88rem; font-weight: 600; }
+.submit-btn { width: 100%; margin-top: .2rem; }
+.sent-state { min-height: 280px; display: grid; place-items: center; text-align: center; padding: 1rem; }
+.sent-icon { width: 72px; height: 72px; border-radius: 50%; display: grid; place-items: center; background: rgba(93,226,152,.08); border: 1px solid rgba(93,226,152,.18); color: #5de298; font-size: 1.7rem; font-weight: 800; margin-bottom: .75rem; }
+@media (max-width: 980px) { .contact-layout, .form-row { grid-template-columns: 1fr; } }
