@@ -13,13 +13,13 @@ const NAV = [
 
 const PLAY_STORE_URL = import.meta.env.VITE_PLAYSTORE_URL || '#';
 
-export function DownloadButton({ className = '', href = PLAY_STORE_URL, label = 'Download App', badge = 'Soon', title = 'Android app coming soon' }) {
+export function DownloadButton({ className = '', href = PLAY_STORE_URL, label = 'Download App', badge = 'Live', title = 'Android app Now Available' }) {
   const isPlaceholder = !href || href === '#';
 
   return (
     <a
       href={isPlaceholder ? undefined : href}
-      className={`btn-download coming-soon ${className}`}
+      className={`btn-download btn-gold ${className}`}
       onClick={isPlaceholder ? (e) => e.preventDefault() : undefined}
       aria-disabled={isPlaceholder ? 'true' : undefined}
       title={title}
@@ -73,12 +73,7 @@ export default function Navbar() {
 
         <div className="nav-cta">
           <DownloadButton />
-          <Link to="/contact" className="btn btn-gold nav-btn">Get access</Link>
-          <button className={`hamburger${open ? ' open' : ''}`} onClick={() => setOpen((v) => !v)} aria-label="Toggle menu">
-            <span />
-            <span />
-            <span />
-          </button>
+         
         </div>
       </div>
 
@@ -88,10 +83,7 @@ export default function Navbar() {
             {item.label}
           </NavLink>
         ))}
-        <div className="mob-actions">
-          <DownloadButton className="mob-download-btn" />
-          <Link to="/contact" className="btn btn-gold mob-cta">Get access</Link>
-        </div>
+        
       </div>
     </header>
   );
