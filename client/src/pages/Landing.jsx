@@ -20,7 +20,7 @@ const PLANS = [
   { name: 'Pro', price: '₹499', desc: 'The balanced plan for growing businesses.', perks: ['Everything in Starter', 'Website generation', 'Priority support', 'Extra tokens'], cta: 'Get Pro', featured: true },
   { name: 'Scale', price: '₹999', desc: 'For teams that want the full system and highest limits.', perks: ['Everything in Pro', 'Advanced AI usage', 'Higher token limits', 'Dedicated support'], cta: 'Get Scale' },
 ];
-
+const PLAY_STORE_URL = import.meta.env.VITE_PLAYSTORE_URL || '#';
 export default function Landing() {
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => entries.forEach((entry) => entry.isIntersecting && entry.target.classList.add('visible')), { threshold: 0.12 });
