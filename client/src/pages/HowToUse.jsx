@@ -1,6 +1,112 @@
-import { useEffect } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { PlayStoreBadge } from '../components/Navbar.jsx';
+import homeLight from '../assets/screens/home-light.jpeg';
+import homeDark from '../assets/screens/home-dark.jpeg';
+import aiLight from '../assets/screens/ai-light.jpeg';
+import allServicesLight from '../assets/screens/all-services-light.jpeg';
+import profileLight from '../assets/screens/profile-light.jpeg';
+import loginScreen from '../assets/screens/login.jpeg';
+import salesLight from '../assets/screens/sales-light.jpeg';
+import kpiDark from '../assets/screens/kpi-dark.jpeg';
 import './HowToUse.css';
-const STEPS = [{ num: '01', title: 'Join early access', desc: 'Start with the waitlist and get ready for the Android launch.', tips: ['Use a working email', 'Check updates in your inbox', 'No heavy setup required'] }, { num: '02', title: 'Add your business details', desc: 'Create your workspace and organize your company profile.', tips: ['Keep the company name consistent', 'Invite your teammates later', 'Set the base workflow structure'] }, { num: '03', title: 'Capture leads and work', desc: 'Track opportunities and tasks from a single dashboard.', tips: ['Prioritize hot leads', 'Assign owners clearly', 'Keep deadlines visible'] }, { num: '04', title: 'Ask the AI for answers', desc: 'Use plain language to get summaries, insights, and next actions.', tips: ['Ask for revenue snapshots', 'Request overdue work', 'Ask for a lead summary'] }, { num: '05', title: 'Generate web content', desc: 'Create a site draft, preview it, and iterate quickly.', tips: ['Use a clear prompt', 'Review before sharing', 'Refine copy and layout later'] }, { num: '06', title: 'Scale with the right plan', desc: 'Upgrade only when you need more capacity or priority support.', tips: ['Choose Starter or Pro', 'Use add-ons later', 'Stay flexible as you grow'] }];
-const TIPS = [{ title: 'Use direct prompts', body: 'Short, specific prompts usually produce cleaner answers and faster drafts.' }, { title: 'Keep a weekly review', body: 'Spend a few minutes each week checking leads, tasks, and financial snapshots.' }, { title: 'Share feedback early', body: 'The product is still evolving, so your input helps shape what gets built next.' }];
-export default function HowToUse() { useEffect(() => { const observer = new IntersectionObserver((entries) => entries.forEach((entry) => entry.isIntersecting && entry.target.classList.add('visible')), { threshold: 0.12 }); document.querySelectorAll('.reveal').forEach((el) => observer.observe(el)); return () => observer.disconnect(); }, []); return (<div className="how-page"><section className="page-hero"><div className="container"><div className="badge animate-fade-up"><span>✦</span> How it works</div><h1 className="animate-fade-up" style={{ animationDelay: '0.08s' }}>Set up fast.<br /><span className="gold-text">Use it daily.</span></h1><p className="page-hero-sub animate-fade-up" style={{ animationDelay: '0.16s' }}>A simple path from first sign-in to real daily value.</p></div></section><section className="section"><div className="container steps-grid">{STEPS.map((step, index) => (<article key={step.num} className="card step-card reveal" style={{ transitionDelay: `${index * 0.07}s` }}><div className="step-head"><span className="step-num">{step.num}</span><span className="step-icon">✦</span></div><h3>{step.title}</h3><p>{step.desc}</p><ul>{step.tips.map((tip) => (<li key={tip}><span>•</span>{tip}</li>))}</ul></article>))}</div></section><section className="section"><div className="container tips-shell"><div className="section-head reveal"><p className="section-label">Pro tips</p><h2>Keep the workflow tight.</h2><div className="gold-line" style={{ marginTop: '1rem' }} /></div><div className="tips-grid">{TIPS.map((tip, index) => (<div key={index} className="card tip-card reveal" style={{ transitionDelay: `${index * 0.08}s` }}><h4>{tip.title}</h4><p>{tip.body}</p></div>))}</div></div></section><section className="section"><div className="container guide-cta reveal"><p className="section-label">Next step</p><h2>Ready to get started?</h2><p>Join the waitlist and explore support resources while the app is rolling out.</p><div className="cta-actions"><Link to="/contact" className="btn btn-gold">Get access</Link><Link to="/support" className="btn btn-outline">Browse support</Link></div></div></section></div>); }
+
+const STEPS = [
+  { title: 'Download from Play Store', desc: 'Search "Astric" on Google Play or tap the badge on this site. Free — no card needed.', screen: loginScreen },
+  { title: 'Create your account', desc: 'Sign up in seconds. Your workspace is set up automatically on first login.', screen: loginScreen },
+  { title: 'Explore the dashboard', desc: 'Your home screen shows priorities, metrics, and quick actions — all in one clear view.', screen: homeLight },
+  { title: 'Set up your CRM', desc: 'Add your first lead or customer. Track status, history, and follow-ups from one screen.', screen: salesLight },
+  { title: 'Try the AI assistant', desc: 'Tap the AI tab and ask anything — "Show my hottest leads" or "Summarize this week\'s cash flow."', screen: aiLight },
+  { title: 'Browse all modules', desc: 'Hit "All Services" to explore invoicing, analytics, file storage, team, and collaboration tools.', screen: allServicesLight },
+  { title: 'Customize your profile', desc: 'Set your business name, preferences, and notification settings in your profile.', screen: profileLight },
+  { title: 'Track your KPIs', desc: 'Open the analytics module to see real-time performance, trends, and business health.', screen: kpiDark },
+];
+
+const TOKENS = [
+  { badge: 'free', plan: 'Starter', label: 'Starter tokens', desc: 'AI usage is included in the free plan for core queries and summaries.' },
+  { badge: 'pro', plan: 'Pro — ₹499/mo', label: 'Extended tokens', desc: 'More AI power for deeper queries, website generation, and richer insights.' },
+  { badge: 'scale', plan: 'Scale — ₹999/mo', label: 'Highest limits', desc: 'Maximum AI capacity for teams with heavy daily usage and automation needs.' },
+];
+
+export default function HowToUse() {
+  const [active, setActive] = useState(0);
+
+  return (
+    <div className="how-page">
+      <section className="page-hero">
+        <div className="container page-hero-grid">
+          <div>
+            <div className="badge animate-fade-up"><span className="dot"/>How it works</div>
+            <h1 className="animate-fade-up stagger-1">Up and running<br/><span className="blue-text">in minutes.</span></h1>
+            <p className="page-hero-sub animate-fade-up stagger-2">
+              Astric is designed to feel familiar from the first tap. Eight steps from install to fully operational business workspace.
+            </p>
+            <div style={{marginTop:'1.75rem'}} className="animate-fade-up stagger-3">
+              <PlayStoreBadge />
+            </div>
+          </div>
+          <div className="page-hero-side card-dark animate-fade-up stagger-2">
+            <span className="side-label">Quick start</span>
+            <h3>Install → Sign up → Start working.</h3>
+            <p style={{marginTop:'.75rem'}}>The whole setup takes under 3 minutes. No complicated onboarding, no mandatory tutorials — just your workspace, ready to go.</p>
+          </div>
+        </div>
+      </section>
+
+      <section className="section" style={{background:'var(--bg-alt)'}}>
+        <div className="container">
+          <div className="section-head reveal">
+            <p className="section-label">Step by step</p>
+            <h2>Your first 8 steps<br/><span className="blue-text">with Astric.</span></h2>
+            <div className="accent-line"/>
+          </div>
+          <div className="steps-layout">
+            <div className="steps-list">
+              {STEPS.map((step, i) => (
+                <div key={i} className={`step-item${active === i ? ' active' : ''}`} onClick={() => setActive(i)}>
+                  <div className="step-num">{String(i + 1).padStart(2, '0')}</div>
+                  <div className="step-body">
+                    <h4>{step.title}</h4>
+                    <p>{step.desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div className="steps-visual">
+              <div className="step-screen">
+                <img src={STEPS[active].screen} alt={STEPS[active].title}/>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="section tokens-section">
+        <div style={{position:'absolute',inset:0,background:'radial-gradient(circle at 20% 50%,rgba(26,108,255,.18),transparent 50%)',pointerEvents:'none'}}/>
+        <div className="container" style={{position:'relative',zIndex:1}}>
+          <div className="section-head reveal">
+            <p className="section-label" style={{color:'var(--teal)'}}>AI tokens</p>
+            <h2 style={{color:'white'}}>How AI usage<br/><span style={{color:'var(--gold)'}}>works.</span></h2>
+            <div className="accent-line" style={{background:'linear-gradient(90deg,var(--gold),var(--gold-2))'}}/>
+            <p style={{color:'rgba(230,242,255,.65)',marginTop:'1rem',maxWidth:'44ch'}}>
+              Tokens power every AI interaction — queries, summaries, and website generation. Each plan includes a monthly allowance.
+            </p>
+          </div>
+          <div className="tokens-grid">
+            {TOKENS.map((t) => (
+              <div key={t.plan} className="token-card">
+                <span className={`token-badge ${t.badge}`}>{t.plan}</span>
+                <h4>{t.label}</h4>
+                <p>{t.desc}</p>
+              </div>
+            ))}
+          </div>
+          <div style={{marginTop:'2.5rem',display:'flex',gap:'.85rem',flexWrap:'wrap'}}>
+            <PlayStoreBadge />
+            <Link to="/contact" className="btn btn-outline-inv">Ask about plans →</Link>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+}
